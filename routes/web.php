@@ -14,7 +14,7 @@
 Auth::routes();
 
 Route::get('/',function(){
-	return redirect('https://beep.nl');
+	return redirect('webapp');
 });
 
 Route::get('home', function(){
