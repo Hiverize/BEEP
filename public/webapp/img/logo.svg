@@ -16,7 +16,10 @@
    id="svg4355"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="logo.svg">
+   sodipodi:docname="logo.svg"
+   inkscape:export-filename="/home/diren/Documents/BEEP/public/webapp/img/logo.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs4357">
     <clipPath
@@ -61,16 +64,16 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8"
-     inkscape:cx="-20.877859"
-     inkscape:cy="93.879612"
+     inkscape:cx="-71.802403"
+     inkscape:cy="35.308183"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="2560"
-     inkscape:window-height="1016"
-     inkscape:window-x="0"
-     inkscape:window-y="27"
-     inkscape:window-maximized="1"
+     inkscape:window-width="763"
+     inkscape:window-height="429"
+     inkscape:window-x="1639"
+     inkscape:window-y="305"
+     inkscape:window-maximized="0"
      units="px" />
   <metadata
      id="metadata4360">
@@ -80,7 +83,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -99,9 +102,9 @@
        height="649"
        width="1297"
        clip-path="url(#clipPath4205)"
-       transform="matrix(0.11572112,0,0,0.11572112,354.84852,932.81471)"
-       inkscape:export-xdpi="13.289604"
-       inkscape:export-ydpi="13.289604"
+       transform="matrix(0.10965722,0,0,0.10965722,336.25834,937.04534)"
+       inkscape:export-xdpi="99.062042"
+       inkscape:export-ydpi="99.062042"
        inkscape:export-filename="/home/diren/Documents/2018/beep/svg/logo.svg" />
     <image
        y="170.71935"
@@ -113,9 +116,9 @@
        height="649"
        width="1297"
        clip-path="url(#clipPath4211)"
-       transform="matrix(0.11572112,0,0,0.11572112,276.48279,956.24025)"
-       inkscape:export-xdpi="13.289604"
-       inkscape:export-ydpi="13.289604"
+       transform="matrix(0.10965722,0,0,0.10965722,261.99904,959.24336)"
+       inkscape:export-xdpi="99.062042"
+       inkscape:export-ydpi="99.062042"
        inkscape:export-filename="/home/diren/Documents/2018/beep/svg/logo.svg" />
     <image
        y="-189.28065"
@@ -127,9 +130,9 @@
        height="649"
        width="1297"
        clip-path="url(#clipPath4264-9)"
-       transform="matrix(0.11975751,0,0,0.11975751,82.335033,1026.7675)"
-       inkscape:export-xdpi="13.289604"
-       inkscape:export-ydpi="13.289604"
+       transform="matrix(0.1134821,0,0,0.1134821,78.024816,1026.0749)"
+       inkscape:export-xdpi="99.062042"
+       inkscape:export-ydpi="99.062042"
        inkscape:export-filename="/home/diren/Documents/2018/beep/svg/logo.svg" />
   </g>
 </svg>

@@ -17,7 +17,7 @@
    version="1.1"
    inkscape:version="0.91 r13725"
    sodipodi:docname="beep-icon-logo.svg"
-   inkscape:export-filename="/home/diren/Documents/2018/beep/svg/beep-icon-logo.png"
+   inkscape:export-filename="/home/diren/Documents/BEEP/public/webapp/img/beep-icon-logo.png"
    inkscape:export-xdpi="13"
    inkscape:export-ydpi="13">
   <defs
@@ -64,16 +64,16 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
-     inkscape:cx="-20.877859"
+     inkscape:cx="-19.867706"
      inkscape:cy="22.451041"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="763"
-     inkscape:window-height="425"
-     inkscape:window-x="1612"
-     inkscape:window-y="147"
-     inkscape:window-maximized="0"
+     inkscape:window-width="2560"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
      units="px" />
   <metadata
      id="metadata4360">
@@ -83,7 +83,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -102,7 +102,7 @@
        height="649"
        width="1297"
        clip-path="url(#clipPath4205)"
-       transform="matrix(0.23825467,0,0,0.23825467,730.50155,806.91204)"
+       transform="matrix(0.21620302,0,0,0.21620302,662.89746,823.57002)"
        inkscape:export-xdpi="13.289604"
        inkscape:export-ydpi="13.289604"
        inkscape:export-filename="/home/diren/Documents/2018/beep/svg/logo.svg" />
@@ -116,7 +116,7 @@
        height="649"
        width="1297"
        clip-path="url(#clipPath4211)"
-       transform="matrix(0.23825467,0,0,0.23825467,569.15675,855.14217)"
+       transform="matrix(0.21620302,0,0,0.21620302,516.48592,867.33621)"
        inkscape:export-xdpi="13.289604"
        inkscape:export-ydpi="13.289604"
        inkscape:export-filename="/home/diren/Documents/2018/beep/svg/logo.svg" />
@@ -130,7 +130,7 @@
        height="649"
        width="1297"
        clip-path="url(#clipPath4264-9)"
-       transform="matrix(0.24656507,0,0,0.24656507,169.43187,1000.3486)"
+       transform="matrix(0.22374425,0,0,0.22374425,153.75756,999.1031)"
        inkscape:export-xdpi="13.289604"
        inkscape:export-ydpi="13.289604"
        inkscape:export-filename="/home/diren/Documents/2018/beep/svg/logo.svg" />
