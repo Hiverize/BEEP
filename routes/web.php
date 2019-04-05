@@ -29,6 +29,10 @@ Route::get('info', function(){
 	return view('phpinfo');
 });
 
+Route::get('manual', function(){
+	return view('manual');
+});
+
 // Hack for redirecting e-mail reset password link to webapp
 // Route::get('password/reset/{token}',['as'=>'password.reset', function ($token) {
 //     return redirect(env('APP_URL').'/#!/login/reset/'.$token);
@@ -37,23 +41,23 @@ Route::get('info', function(){
 // Secured by login
 Route::group(
 	[
-		'prefix' => LaravelLocalization::setLocale(), 
+		'prefix' => LaravelLocalization::setLocale(),
 		'middleware' => ['auth', 'localeSessionRedirect', 'localizationRedirect', 'verified']
-	], 
-	function() 
+	],
+	function()
 	{
 		Route::get('dashboard', ['as'=>'dashboard.index','uses'=>'DashboardController@index']);
 
 		Route::resource('checklists', 'ChecklistController');
 		Route::resource('inspections', 'InspectionsController');
-		Route::resource('users', 'UserController');		
-		
+		Route::resource('users', 'UserController');
+
 
 		Route::group(
 			['middleware' => ['role:superadmin|admin|translator']],
 			function()
-			{				
-				
+			{
+
 				// Routes
 				Route::get('languages',				['as'=>'languages.index','uses'=>'LanguageController@index','middleware' => ['permission:language-list|language-create|language-edit|language-delete']]);
 				Route::get('languages/create',		['as'=>'languages.create','uses'=>'LanguageController@create','middleware' => ['permission:language-create']]);
@@ -82,7 +86,7 @@ Route::group(
 				Route::get('sensors/{id}/edit',		['as'=>'sensors.edit','uses'=>'SensorController@edit','middleware' => ['permission:sensor-edit']]);
 				Route::patch('sensors/{id}',		['as'=>'sensors.update','uses'=>'SensorController@update','middleware' => ['permission:sensor-edit']]);
 				Route::delete('sensors/{id}',		['as'=>'sensors.destroy','uses'=>'SensorController@destroy','middleware' => ['permission:sensor-delete']]);
-				
+
 		});
 
 		Route::group(
@@ -98,7 +102,7 @@ Route::group(
 				Route::patch('roles/{id}',		['as'=>'roles.update','uses'=>'RoleController@update','middleware' => ['permission:role-edit']]);
 				Route::delete('roles/{id}',		['as'=>'roles.destroy','uses'=>'RoleController@destroy','middleware' => ['permission:role-delete']]);
 
-				// Resource controllers 
+				// Resource controllers
 				Route::resource('permissions', 		'PermissionController');
 				Route::resource('physicalquantity', 'PhysicalQuantityController');
 				Route::resource('categoryinputs', 	'CategoryInputsController');
@@ -111,11 +115,10 @@ Route::group(
 				Route::get('taxonomy/display',	['as'=>'taxonomy.display','uses'=>'TaxonomyController@display']);
 
 				Route::delete('checklists/destroy/copies',	['as'=>'checklists.copies','uses'=>'ChecklistController@destroyCopies']);
-				
+
 			}
 		);
 
 	}
 );
 Auth::routes(['verify' => true]);
-
