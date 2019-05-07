@@ -361,7 +361,7 @@ LANG['de'] =
     add_to_calendar         : 'Zum Kalender hinzufügen',
     sort_on                 : 'Sortieren nach',
     Whats_new               : 'Neu in v2!',
-    Manual                  : 'Handbuch (EN)',
+    Manual                  : 'Handbuch',
 
     Site_title 				: 'Bob-App',
 
