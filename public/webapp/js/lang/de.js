@@ -19,8 +19,10 @@ LANG['de'] =
 	/* main */
 	Website : 'Webseite',
 	Feedback : 'Feedback',
-	Feedback_mail_header : 'Beep app feedback',
-	Feedback_mail_body : 'Dear Beep foundation,%0D%0A%0D%0AHereby my feedback about the Beep app.%0D%0A%0D%0AI discovered this:%0D%0A%0D%0AJust before that happened, i did:%0D%0A%0D%0AThe screen was looking like (please include a screenshot):%0D%0A%0D%0A%0D%0A%0D%0A',
+	Feedback_mail_header : 'Bob app feedback',
+	Feedback_mail_body : '
+Liebes Bob Team,%0D%0A%0D%0Ahier ist mein Feedback zur Bob-App.%0D%0A%0D%0AIch habe das beobachtet: this:%0D%0A%0D%0ABevor das passiert ist, habe ich das gemacht:%0D%0A%0D%0A Der Bildschirm hat so ausgesehen (bitte Screenshot hinzufügen):%0D%0A%0D%0A%0D%0A%0D%0A
+Dear Bob Team,%0D%0A%0D%0AHereby my feedback about the Bob app.%0D%0A%0D%0AI discovered this:%0D%0A%0D%0AJust before that happened, i did:%0D%0A%0D%0AThe screen was looking like (please include a screenshot):%0D%0A%0D%0A%0D%0A%0D%0A',
 	Diagnostic_info : 'Diagnostic information (in case of a bug):%0D%0A',
 	back : 'Zurück',
 	menu : 'Menü',
@@ -363,7 +365,7 @@ LANG['de'] =
     Whats_new               : 'Neu in v2!',
     Manual                  : 'Handbuch (EN)',
 
-    Site_title 				: 'BEEP | Bienenmonitor',
+    Site_title 				: 'Bob-App',
 
     could_not_create_user   : 'Nutzer*in kann zu diesem Zeitpunkt nicht erstellt werden. Entschuldigung für die Umstände, bitte versuche es später noch mal.',
     email_verified          : 'Deine E-Mail-Adresse wurde verifiziert.',
