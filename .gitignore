@@ -12,6 +12,7 @@ public/storage
 public/webapp/vendor
 public/webapp/vendor/*
 public/webapp/js/constants.js
+public/.htaccess
 
 storage/app/*
 storage/framework/cache/*
