@@ -18,12 +18,12 @@ You are free to use the BEEP app, it's free and it will be developed further in 
 
 * Linux Debian (8+)
 * Software installed
-  * PHP 7.2
+  * PHP 7.1+
   * MariaDB/MySQL
   * Apache 2 (or Nginx, creating Nginx 'server blocks' in step 4)
+  * InfluxDB (https://docs.influxdata.com/influxdb/v1.7/introduction/installation/)
   * [Composer](https://getcomposer.org/download/) - Installation tool for PHP/Laravel dependencies for API
   * [npm](https://www.npmjs.com/get-npm) - Installation tool for Javascript/Angular dependencies for App
-  * [Bower](https://bower.io/) ```npm install -g bower``` - Installation tool for front-end dependencies for App
 * Optional: Letsencrypt SSL certificate generation
 
 
@@ -39,7 +39,7 @@ Create a MySQL database (type: InnoDB, encoding: UTF_8, collation: utf8_unicode_
 
 ```bee_data```
 
-**NB: Make sure to pass the user and credentials to the newly made .env file after step 4.**
+**NB: Make sure to pass the user and credentials to the newly made .env file after step 3.**
 
 
 ## 3. Install required vendor libraries 
@@ -51,6 +51,18 @@ b. Then run it: ```./run_actions.sh```
 ## 4. Set up your end-points
 
 a. Make sure your server has 2 different virtual hosts for the API and the APP
+
+NB: On AMAzon AWS (Bitnami LAMP_7.1): 
+a. Make sure your Bitnami server includes your apps/apache_vhost.conf in 
+```
+sudo nano /opt/bitnami/apache2/conf/bitnami/bitnami-apps-vhosts.conf
+```
+
+Contains one or more Includes:
+```
+# Bitnami applications installed in a Virtual Host
+Include "/opt/bitnami/apps/apache/portal-vhost.conf"
+```
 
 
 API (replace 'beep.nl' with your own server/test domain)
@@ -91,7 +103,17 @@ b. Optionally, install SSL certificates to your endpoints with [Let's Encrypt](h
 
 With command: ```sudo certbot --authenticator webroot --installer apache```
 
-## 5. If you would like to easily deploy your fork (or this repo), 
+## 5. Add Influx database
+```
+influx
+> CREATE USER user_influx WITH PASSWORD 'pass_influx' WITH ALL PRIVILEGES
+> CREATE DATABASE bee_data
+> exit
+```
+**NB: Make sure to pass the user and credentials to the .env file that has been created in step 3.**
+**NB: If your Influx version was < 1.1.x (no TSI support), when using backups to transfer data: first install the old version that you are currently using on a new server, import the backups, then update to the newest Influx version!**
+
+## 6. If you would like to easily deploy your fork (or this repo), 
 
 a. Make sure to add your repo to git remote: ```git remote set url https://github.com/beepnl/BEEP.git```
 
@@ -113,7 +135,7 @@ b. For the webapp to reach the API, rename the file 'public/webapp/js/constants.
 
 ## 3. Register new user
 
-a. Go to ```api.[your_domain]/webapp/index.html#!/login/create```
+a. Go to ```api.[your_domain]/webapp#!/login/create```
 
 b. Create a new user
 
@@ -152,9 +174,10 @@ Please request access to https://trello.com/b/Eb3CcKES/beep-hive-check-app if yo
 Upcoming:
 * Hardware weighing scale + audio measurement kit development (2018 Q2-Q4)
   * See https://www.openhardware.io/view/630
-* Bee keeping teacher support - Inspection list sharing (2018 Q3)
 * Integration sensor data / hive inspections (2018 Q4)
-* User feedback improvements (2019 Q1)
+* User feedback improvements (2019 Q1 + Q2)
+* Bee keeping teacher support - Inspection list sharing (2019 Q2)
+* Hardware measurement system version 3 (2019 Q3)
 * Many new features for health checking and sensor (2019 Q3 - 2023 Q3)
 
 History:

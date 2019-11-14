@@ -3,7 +3,7 @@
 return [
 
     'subject_invite'=> 'Group invitation',
-    'group_text'    => 'Hereby an invitation to join the following Beep hive group.',
+    'group_text'    => 'Hereby an invitation from :invited_by to join the following Beep hive cooperation group.',
     'enjoy'         => 'Have fun with it!',
     'Admin'         => 'Group administrator',
     'of'            => 'of',
@@ -16,5 +16,6 @@ return [
     'email_na'      => 'These e-mail addresses are not yet members of Beep: ',
     'Invited'       => 'Invited: ',
     'Updated'       => 'Updated: ',
-
+    'Created'       => 'Created: ',
+    'Deleted'       => 'Deleted: ',
 ];

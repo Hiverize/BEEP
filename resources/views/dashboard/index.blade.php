@@ -5,7 +5,12 @@
 
 @section('content')
 
-	
+	@if ($connection !== true)
+		<div class="alert alert-danger">
+			No InfluxBD connection: {{ substr($connection, 0, 200) }}...
+		</div>
+	@endif
+
 	<div class="row">
 
 		<div class="col-lg-3 col-xs-6">
@@ -29,7 +34,7 @@
 			<div class="small-box bg-primary">
 				<div class="inner">
 					<h3>{{ $data['hourusers'] }} / {{ $data['dayusers'] }}</h3>
-					<p>Active users last hour / day</p>
+					<p>Active users last hour / since yesterday</p>
 				</div>
 				<div class="icon">
 					<i class="fa fa-user-circle-o"></i>
@@ -142,52 +147,14 @@
 	</div>
 	<div class="row">
 
+		@if ($checklist_details)
+
 		<div class="col-lg-3 col-xs-6">
 		<!-- small box -->
 			<div class="small-box bg-yellow">
 				<div class="inner">
 					<h3>{{ $data['checklists'] }} / {{ $data['checklists_edited'] }}</h3>
 					<p>Checklists total / Edited</p>
-				</div>
-				<div class="icon">
-					<i class="fa fa-list"></i>
-				</div>
-				<a href="/checklists" class="small-box-footer">
-	               Checklists <i class="fa fa-arrow-circle-right"></i>
-	            </a>
-			</div>
-		</div>
-
-		<div class="col-lg-3 col-xs-6">
-		<!-- small box -->
-			<div class="small-box bg-yellow">
-				<div class="inner">
-					<h3>Top 5 lists size</h3>
-					<p>
-					@foreach($data['checklist_categories_max'] as $value)
-						<span>{{ $value->count }}, </span> 
-					@endforeach
-					</p>
-				</div>
-				<div class="icon">
-					<i class="fa fa-list"></i>
-				</div>
-				<a href="/checklists" class="small-box-footer">
-	               Checklists <i class="fa fa-arrow-circle-right"></i>
-	            </a>
-			</div>
-		</div>
-
-		<div class="col-lg-3 col-xs-6">
-		<!-- small box -->
-			<div class="small-box bg-yellow">
-				<div class="inner">
-					<h3>Btm 5 list itm size</h3>
-					<p>
-					@foreach($data['checklist_categories_min'] as $value)
-						<span>{{ $value->count }}, </span> 
-					@endforeach
-					</p>
 				</div>
 				<div class="icon">
 					<i class="fa fa-list"></i>
@@ -214,10 +181,74 @@
 			</div>
 		</div>
 
+		<div class="col-lg-3 col-xs-6">
+		<!-- small box -->
+			<div class="small-box bg-yellow">
+				<div class="inner">
+					<h3>Top 5 lists size</h3>
+					<p>
+					@foreach($data['checklist_categories_max'] as $value)
+						<span>{{ $value->count }}, </span> 
+					@endforeach
+					</p>
+				</div>
+				<div class="icon">
+					<i class="fa fa-list"></i>
+				</div>
+				<a href="/checklists" class="small-box-footer">
+	               Checklists <i class="fa fa-arrow-circle-right"></i>
+	            </a>
+			</div>
+		</div>
+
+		{{-- <div class="col-lg-3 col-xs-6">
+		<!-- small box -->
+			<div class="small-box bg-yellow">
+				<div class="inner">
+					<h3>Btm 5 list itm size</h3>
+					<p>
+					@foreach($data['checklist_categories_min'] as $value)
+						<span>{{ $value->count }}, </span> 
+					@endforeach
+					</p>
+				</div>
+				<div class="icon">
+					<i class="fa fa-list"></i>
+				</div>
+				<a href="/checklists" class="small-box-footer">
+	               Checklists <i class="fa fa-arrow-circle-right"></i>
+	            </a>
+			</div>
+		</div> --}}
+
+		@endif
+
+		<div class="col-lg-3 col-xs-6">
+		<!-- small box -->
+			<div class="small-box bg-orange">
+				<div class="inner">
+					<h3>{{ $data['sensors'] }}</h3>
+					<p>{{ __('general.Sensors') }}</p>
+				</div>
+				<div class="icon">
+					<i class="fa fa-wifi"></i>
+				</div>
+				<a href="#" class="small-box-footer">
+	              No extra info
+	            </a>
+			</div>
+		</div>
+
+		
+
 	</div>
+
+
 	<div class="row">
 
-		<div class="col-lg-6 col-xs-12">
+		@if ($checklist_details)
+		
+		<div class="col-lg-4 col-xs-12">
 		<!-- small box -->
 			<div class="small-box bg-red">
 				<div class="inner">
@@ -242,7 +273,7 @@
 			</div>
 		</div>
 
-		<div class="col-lg-6 col-xs-12">
+		<div class="col-lg-4 col-xs-12">
 		<!-- small box -->
 			<div class="small-box bg-red">
 				<div class="inner">
@@ -266,7 +297,53 @@
 	            </a>
 			</div>
 		</div>
+		
+		<div class="col-lg-4 col-xs-6">
+		<!-- small box -->
+			<div class="small-box bg-orange">
+				<div class="inner">
+					<h3>{{ $data['measurements'] }} {{ __('general.Measurements') }}</h3>
+					<div style="overflow: auto; height: 230px;">
+						<dl class="dl-horizontal">
+						@foreach( $data['measurement_details'] as $name => $count)
+							<dt>{{ $name }}</dt>
+							<dd>{{ $count }}</dd>
+						@endforeach
+						</dl>
+					</div>
+				</div>
+				<div class="icon">
+					<i class="fa fa-wifi"></i>
+				</div>
+				<a href="#" class="small-box-footer">
+	               No extra info
+	            </a>
+			</div>
+		</div>
+
+
+		@else
+
+			<div class="col-lg-12 col-xs-12">
+			<!-- small box -->
+				<div class="small-box bg-red">
+					<div class="inner">
+						<h3>Get inspection variable usage and sensor measurements</h3>
+					</div>
+					<div class="icon">
+						<i class="fa fa-check-circle"></i>
+					</div>
+					<a href="/dashboard?checklist_details=1" class="small-box-footer">
+		               Load data <i class="fa fa-arrow-circle-right"></i>
+		            </a>
+				</div>
+			</div>
+
+
+
+		@endif
 
 	</div>
+
 
 @endsection

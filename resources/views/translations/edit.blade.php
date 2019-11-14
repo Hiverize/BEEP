@@ -7,7 +7,7 @@
 
     @component('components/box')
         @slot('title')
-            <img src="/webapp/img/{{ $language->icon }}" style="width: 30px;"> App {{ __('general.translations') }} {{ $language->name_english }} 
+            <img src="/img/{{ $language->icon }}" style="width: 30px;"> App {{ __('general.translations') }} {{ $language->name_english }} 
         @endslot
 
         @slot('body')
@@ -17,7 +17,7 @@
                 <div class="col-xs-12">
                     <h4>How to translate app texts?</h4>
                     <ol>
-                        <li>Download the <a href="/webapp/js/lang/{{ $language->twochar }}.js">{{ $language->name_english }} app translations Javascript file ({{ $language->twochar }}.js) here</a></li>
+                        <li>Download the <a href="/js/languages/{{ $language->twochar }}.js">{{ $language->name_english }} app translations Javascript file ({{ $language->twochar }}.js) here</a></li>
                         <li>Open it in a text editor</li>
                         <li>ONLY change all the English texts after the colons (:) between 'single quotes' (and leave the quotes there). You can use all UTF-8 characters.</li>
                         <li>If translated, please send the file to <a href="mailto:pim@beep.nl">pim@beep.nl</a> to create a new app language and include it in the app files.</li> 
@@ -34,7 +34,7 @@
 
     @component('components/box')
         @slot('title')
-            <img src="/webapp/img/{{ $language->icon }}" style="width: 30px;"> {{ __('beep.Checklist') }} {{ __('general.translations') }} {{ $language->name_english }}
+            <img src="/img/{{ $language->icon }}" style="width: 30px;"> {{ __('beep.Checklist') }} {{ __('general.translations') }} {{ $language->name_english }}
         @endslot
 
         @slot('action')

@@ -27,6 +27,7 @@ Homestead.yaml
 .phpunit.result.cache
 .DS_Store
 .phpintel
+.log
 
 npm-debug.log
 yarn-error.log
@@ -35,3 +36,5 @@ yarn-error.log
 /.vagrant
 public/uploads/avatars/1548334183.jpg
 public/uploads/avatars/1548448850.jpg
+
+/node_modules

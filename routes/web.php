@@ -25,8 +25,8 @@ Route::get('admin', function(){
 	return redirect('dashboard');
 });
 
-Route::get('info', function(){
-	return view('phpinfo');
+Route::get('webapp', function(){
+	return view('app/index');
 });
 
 Route::get('manual', function(){
@@ -93,6 +93,10 @@ Route::group(
 			['middleware' => ['role:superadmin']],
 			function()
 			{
+				Route::get('info', function(){
+					return view('phpinfo');
+				});
+				
 				// Roles
 				Route::get('roles',				['as'=>'roles.index','uses'=>'RoleController@index','middleware' => ['permission:role-list|role-create|role-edit|role-delete']]);
 				Route::get('roles/create',		['as'=>'roles.create','uses'=>'RoleController@create','middleware' => ['permission:role-create']]);

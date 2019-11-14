@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Auth;
 use Mail;
 use App\Group;
 use App\Hive;
@@ -17,11 +18,11 @@ use Validator;
 class GroupController extends Controller
 {
 
-    public function index(Request $request, $code=200)
+    public function index(Request $request, $code=200, $message=null, $error=null)
     {
         $groups = $request->user()->groups()->orderBy('name')->get();
         $invite = $request->user()->groupInvitations();
-        return response()->json(['invitations'=>$invite, 'groups'=>$groups], $code);
+        return response()->json(['invitations'=>$invite, 'groups'=>$groups, 'message'=>$message, 'error'=>$error], $code);
     }
 
     public function checktoken(Request $request)
@@ -37,26 +38,26 @@ class GroupController extends Controller
         }
         else
         {
-            $valid_data = $validator->validated();
-            $group_user = DB::table('group_user')->where('token',$valid_data['token'])->where('group_id',$valid_data['group_id'])->value('user_id');
-            $user_name  = User::where('id',$group_user)->value('name');
+            $valid_data     = $validator->validated();
+            $group_user_id  = DB::table('group_user')->where('token',$valid_data['token'])->where('group_id',$valid_data['group_id'])->value('user_id');
+            $user_name      = User::where('id',$group_user_id)->value('name');
             
             $res = DB::table('group_user')->where('token',$valid_data['token'])->where('group_id',$valid_data['group_id'])->update(['invited'=>null,'accepted'=>now(),'declined'=>null,'token'=>null]);
             if ($res)
             {
-                $this->sendAcceptMailToGroupAdmins($valid_data['group_id'], $user_name);
+                $this->sendAcceptMailToGroupAdmins($valid_data['group_id'], $user_name, $group_user_id);
                 return response()->json(['message'=>'group_activated']);
             }
         }
         return response()->json('token_error',500);
     }
 
-    private function sendAcceptMailToGroupAdmins($group_id, $user_name)
+    private function sendAcceptMailToGroupAdmins($group_id, $user_name, $group_user_id)
     {
-        $group_name  = Group::find($group_id)->value('name');
-        $group_admin = DB::table('group_user')->where('group_id',$group_id)->where('admin',1)->pluck('user_id')->toArray();
+        $group_name  = Group::where('id', $group_id)->value('name');
+        $group_admin = DB::table('group_user')->where('user_id', '!=', $group_user_id)->where('group_id',$group_id)->where('admin',1)->pluck('user_id')->toArray();
         $admin_mails = User::whereIn('id',$group_admin)->pluck('name','email')->toArray();
-
+        
         foreach ($admin_mails as $email => $name) 
         {
             Mail::to($email)->send(new GroupAcceptation($name, $group_name, $user_name));
@@ -83,12 +84,12 @@ class GroupController extends Controller
         if (gettype($msg) == 'array')
         {
             if (isset($msg['message']))
-                return response()->json($msg, 201);
+                return $this->index($request, 201, $msg['message']);
             else if (isset($msg['error']))
-                return response()->json($msg, 422);
+                return $this->index($request, 422, null, $msg['error']);
         }
 
-        return $this->index($request, 201);
+        return $this->index($request, 201, __('group.Created').$requestData['name']);
     }
 
 
@@ -97,7 +98,7 @@ class GroupController extends Controller
         $group = $request->user()->groups()->find($id);
         if ($group)
         {
-            return response()->json($group); // formatting for jsTree
+            return response()->json($group); 
         }
         return response()->json(null, 404);
     }
@@ -126,13 +127,13 @@ class GroupController extends Controller
                 if (gettype($msg) == 'array')
                 {
                     if (isset($msg['message']))
-                        return response()->json($msg, 201);
+                        return $this->index($request, 201, $msg['message']);
                     else if (isset($msg['error']))
-                        return response()->json($msg, 422);
+                        return $this->index($request, 422, null, $msg['error']);
                 }
             }
 
-            return $this->index($request, 200);
+            return $this->index($request, 200, __('group.Updated').$requestData['name']);
         }
         return response()->json('no_group_found', 404);
     }
@@ -141,9 +142,9 @@ class GroupController extends Controller
     {
         $res = $this->detachFromGroup($request->user(), $request->user()->groups()->findOrFail($id));
         if ($res)
-            return response()->json('group_detached', 200);
+            return response()->json(['message'=>'group_detached'], 200);
 
-        return response()->json('no_group_detached', 404);
+        return response()->json(['error'=>'no_group_detached'], 404);
     }
 
     private function detachFromGroup($user, $group)
@@ -164,11 +165,16 @@ class GroupController extends Controller
     public function destroy(Request $request, $id)
     {
         $group = $request->user()->groups()->findOrFail($id);
-        
+        $name  = $group->name;
+        $del   = false;
+
         if ($group && $group->getCreatorAttribute())
-            $group->delete();
+        {
+            $del = $group->delete();
+            return $this->index($request, 200, __('group.Deleted').$name);
+        }
         
-        return $this->index($request);
+        return $this->index($request, 404, null, 'no_group_creator');
     }
     
     
@@ -300,7 +306,8 @@ class GroupController extends Controller
             $emails = [];
             foreach ($invite_grp as $email => $user) 
             {
-                Mail::to($email)->send(new GroupInvitation($group, $name, $admin, $user['token']));
+                $invited_by = Auth::user()->name.(Auth::user()->name != Auth::user()->email ? ' ('.Auth::user()->email.')' : '');
+                Mail::to($email)->send(new GroupInvitation($group, $name, $admin, $user['token'], $invited_by));
                 $emails[] = $email;
             }
             return ['message'=>__('group.Invited').implode($emails, ', ')];
