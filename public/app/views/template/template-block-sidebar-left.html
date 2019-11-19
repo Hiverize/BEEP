@@ -71,29 +71,34 @@
         <a ng-click="switchMenu($event, true, '/export')" data-toggle="{{ mobile ? 'offcanvas' : '' }}">
           <i class="fa fa-file-excel-o "></i>
           <span ng-cloak>{{lang.Data_export}}</span>
-        </a>
-      </li>
+        </a>    
+      </li>     
 
       <li class="header">INFO</li>
       <li data-toggle="{{ mobile ? 'offcanvas' : '' }}">
-        <a ng-click="loadUrl('https://hiverize.org/blog/')">
+        <a ng-click="locale == 'nl' ? loadUrl('https://beep.nl/handleiding-v2#samenwerken') : locale == 'de' ? loadUrl('https://beep.nl/anleitung#kooperieren') : loadUrl('https://beep.nl/manual-v2#cooperation')">
           <i class="fa fa-star"></i>
-          <span ng-cloak>Hiverize Blog</span>
-        </a>
-      </li>
+          <span ng-cloak>{{lang.Whats_new}}</span>
+        </a>    
+      </li>  
       <li data-toggle="{{ mobile ? 'offcanvas' : '' }}">
-        <a ng-click="loadUrl('/manual')">
+        <a ng-click="locale == 'nl' ? loadUrl('https://beep.nl/handleiding-v2') : locale == 'de' ? loadUrl('https://beep.nl/anleitung') : loadUrl('https://beep.nl/manual-v2')">
           <i class="fa fa-book"></i>
           <span ng-cloak>{{lang.Manual}}</span>
-        </a>
-      </li>
-
+        </a>    
+      </li>  
       <li data-toggle="{{ mobile ? 'offcanvas' : '' }}">
-        <a ng-click="sendMail('bob@hiverize.org',lang.Feedback_mail_header, lang.Feedback_mail_body+lang.Diagnostic_info+'host:'+host+',user_id:'+user.id+',browser:'+browser)">
+        <a ng-click="loadUrl('https://beep.nl')">
+          <i class="fa fa-info-circle"></i>
+          <span ng-cloak>Beep {{lang.Website}}</span>
+        </a>    
+      </li>   
+      <li data-toggle="{{ mobile ? 'offcanvas' : '' }}">
+        <a ng-click="sendMail('feedback@beep.nl',lang.Feedback_mail_header, lang.Feedback_mail_body+lang.Diagnostic_info+'host:'+host+',user_id:'+user.id+',browser:'+browser)">
           <i class="fa fa-comment"></i>
           <span ng-cloak>{{lang.Feedback}}</span>
-        </a>
-      </li>
+        </a>    
+      </li>   
 
     </ul>
     <!-- /.sidebar-menu -->

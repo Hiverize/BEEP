@@ -15,8 +15,8 @@ class ChecklistFactory
     public function __construct()
     {
         $this->categoryFactory       = new CategoryFactory;
-        $this->std_checklist_type    = 'Bob';
-        $this->std_checklist_name    = 'Bob';
+        $this->std_checklist_type    = 'beep_v2';
+        $this->std_checklist_name    = 'Beep v2';
         $this->old_inspection_items  = ['notes'=>27, 'attention'=>26, 'impression'=>25, 'reminder'=>8, 'reminder_date'=>9];
         $this->old_inspection_texts  = ['Varroatelling: '=>37, 'Resterende moerdoppen: '=>17];
         $this->old_list_category_ids = [6, 32, 35]; // lists

@@ -3,7 +3,7 @@
  * Author: Pim van Gennip (pim@iconize.nl)
  *
  */
- LANG['en'] =
+ LANG['en'] = 
  {
     /* Date picker */
     monthsFull              : [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ],
@@ -127,7 +127,7 @@
     password_recovery_reset_password   : 'Change password',
     password_recovery_reminder_success : 'An e-mail has been sent. Click the link in your e-mail to reset your password for this account.',
     password_recovery_reminder_summary : 'Enter your e-mail address. You will receive an e-mail with a link to change your password in the next step.',
-
+    
     password_recovery_reset_summary    : 'Use the code that you received to set a new password for your account',
     password_recovery_reset_success    : 'You passowrd is successfully changed, and you are logged in.',
 
@@ -188,7 +188,7 @@
     action                  : 'Action',
     reminder                : 'Remember',
     remind_date             : 'Notification date',
-
+    
     overall                 : 'Overall',
     positive_impression     : 'Total impression',
     needs_attention         : 'Needs attention',
@@ -196,7 +196,7 @@
     notes_for_next_inspection: 'Short note for next inspection (visible on overview)',
     Not_implemented_yet     : 'This item is not implemented yet',
     save_input_first        : 'Do you want to save your input first?',
-
+   
     /* dashboard */
     dashboard_title         : 'Dashboard',
     dashboard               : 'Dashboard',
@@ -204,7 +204,7 @@
     measurementsError       : 'Cannot load measurements, check network connection',
     last_measurement        : 'Last measurement',
     at                      : 'at',
-    measurement_system      : 'Beep measurement system',
+    measurement_system      : 'Beep measurement system', 
     no_data                 : 'No data available',
     no_chart_data           : 'No chart data for the selected period',
 
@@ -230,7 +230,6 @@
     Hive_color              : 'Hive color',
     Queen                   : 'Queen',
     queen                   : 'queen',
-    queen_number            : 'Number',
 
     settings_title          : 'Settings',
     settings_description    : 'Settings of the sensors',
@@ -310,7 +309,7 @@
     's_bin391_439Hz'        : '391-439Hz',
     's_bin439_488Hz'        : '439-488Hz',
     's_bin488_537Hz'        : '488-537Hz',
-    's_bin537_586Hz'        : '537-586Hz',
+    's_bin537_586Hz'        : '537-586Hz', 
 
     /* Measurements */
     hour                    : 'Hour',
@@ -409,3 +408,5 @@
     group_explanation_3     : '3. Share specific hives to be viewed by others, of to cooperate on',
     Filter_and_sort_on      : 'Filter and sort on:',
  };
+
+
