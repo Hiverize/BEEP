@@ -3,9 +3,9 @@
  * Author: Pim van Gennip (pim@iconize.nl)
  *
  */
-var LANG 					= [];
-var API_URL           	    = (document.URL.indexOf('beep.test') > -1) ? 'https://beep.test/api/' : (document.URL.indexOf('test.beep.nl') > -1) ? 'https://test.beep.nl/api/' : 'https://api.beep.nl/api/';
-//var API_URL 				= 'https://api.beep.nl/api/';
+var LANG 					= ['de', 'en'];
+//var API_URL           	= (document.URL.indexOf('beep.test') === -1) ? 'https://test.beep.nl/api/' : 'https://beep.test/api/';
+var API_URL 				= 'https://beta.bee-observer.org/api/';
 var CONNECTION_FREQ_REMOTE  = ((60)*1000);
 
 var COLORS = 
@@ -26,7 +26,7 @@ var COLORS =
 	darkergrey:{r:50,  g:50,  b:50},
 }
 
-var SENSORS = ['t','h','p','l','bc_i','bc_o','weight_kg_corrected','weight_kg','t_i']; // not actuators
+var SENSORS = ['t','h','p','l','bc_i','bc_o','weight_kg_corrected','weight_kg','t_i', 't_i_1', 't_i_2', 't_i_3', 't_i_4', 't_i_5']; // not actuators
 var SOUND   = ['s_fan_4','s_fan_6','s_fan_9','s_fly_a','s_tot','s_bin098_146Hz','s_bin146_195Hz','s_bin195_244Hz','s_bin244_293Hz','s_bin293_342Hz','s_bin342_391Hz','s_bin391_439Hz','s_bin439_488Hz','s_bin488_537Hz','s_bin537_586Hz']; // all sound releated sensors
 var DEBUG   = ['bv','rssi','snr']; // all debugging info sensors
 
@@ -46,6 +46,11 @@ var SENSOR_COLOR = {
 	weight_kg			:COLORS.orange,
 	weight_kg_corrected	:COLORS.darkgrey,
 	t_i     :COLORS.red,
+	t_i_1	:COLORS.lightgreen,
+	t_i_2	:COLORS.lightgreen,
+	t_i_3	:COLORS.lightgreen,
+	t_i_4	:COLORS.lightgreen,
+	t_i_5   :COLORS.lightgreen,
 	rssi 	:COLORS.lightgrey,
 	snr 	:COLORS.lightgrey1,
 	lat 	:COLORS.lightgrey2, 
@@ -79,6 +84,11 @@ var SENSOR_NAMES =
 	weight_kg			: 'weight_kg',
 	weight_kg_corrected	: 'weight_kg_corrected',
 	t_i		: 't_i',
+	t_i_1	: 't_i_1',
+	t_i_2	: 't_i_2',
+	t_i_3	: 't_i_3',
+	t_i_4	: 't_i_4',
+	t_i_5   : 't_i_5',
 	rssi	: 'rssi',
 	snr 	: 'snr', 
 	lat 	: 'lat', 
@@ -98,10 +108,10 @@ var SENSOR_NAMES =
 var SENSOR_MIN =
 {
 	t      	: 0,   
-	h      	: 0, 
+	h      	: 40, 
 	l      	: 0,  
-	p 		: 0,
-	bv 		: 0,
+	p 		: 1013,
+	bv 		: 3.0,
 	s_fan_4 : 0,
 	s_fan_6 : 0,
 	s_fan_9 : 0,
@@ -109,11 +119,16 @@ var SENSOR_MIN =
 	s_tot 	: 0,
 	bc_i	: 0,
 	bc_o	: 0,
-	weight_kg			: 0,
-	weight_kg_corrected	: 0,
-	t_i		: 0,
-	rssi	: -120,
-	snr 	: -10, 
+	weight_kg			: 1,
+	weight_kg_corrected	: 1,
+	t_i		: 34,
+	t_i_1	: -10,
+	t_i_2	: -10,
+	t_i_3	: -10,
+	t_i_4	: -10,
+	t_i_5   : -10,
+	rssi	: -90,
+	snr 	: 0, 
 	lat 	: 0, 
 	lon 	: 0, 
 };
@@ -135,6 +150,11 @@ var SENSOR_LOW =
 	weight_kg			: 1,
 	weight_kg_corrected	: 1,
 	t_i		: 34,
+	t_i_1	: -10,
+	t_i_2	: -10,
+	t_i_3	: -10,
+	t_i_4	: -10,
+	t_i_5   : -10,
 	rssi	: -90,
 	snr 	: 0, 
 	lat 	: 0, 
@@ -144,10 +164,10 @@ var SENSOR_LOW =
 var SENSOR_HIGH =
 {
 	t      	: 30,   
-	h      	: 90, 
+	h      	: 80, 
 	l      	: 10000,  
 	p 		: 1100,
-	bv 		: 3.4,
+	bv 		: 3.0,
 	s_fan_4 : 5,
 	s_fan_6 : 5,
 	s_fan_9 : 5,
@@ -158,31 +178,41 @@ var SENSOR_HIGH =
 	weight_kg			: 100,
 	weight_kg_corrected	: 100,
 	t_i		: 37,
+	t_i_1	: 50,
+	t_i_2	: 50,
+	t_i_3	: 50,
+	t_i_4	: 50,
+	t_i_5   : 50,
 	rssi	: -70,
-	snr 	: 15, 
+	snr 	: 7, 
 	lat 	: 180, 
 	lon 	: 180, 
 };
 
 var SENSOR_MAX =
 {
-	t      	: 50,   
-	h      	: 100, 
-	l      	: 100000,  
-	p 		: 1200,
-	bv 		: 3.5,
-	s_fan_4 : 10,
-	s_fan_6 : 10,
-	s_fan_9 : 10,
-	s_fly_a : 10,
-	s_tot 	: 50,
-	bc_i	: 50000,
-	bc_o	: 50000,
-	weight_kg			: 125,
-	weight_kg_corrected	: 125,
-	t_i		: 50,
-	rssi	: 0,
-	snr 	: 20, 
+	t      	: 30,   
+	h      	: 80, 
+	l      	: 10000,  
+	p 		: 1100,
+	bv 		: 3.0,
+	s_fan_4 : 5,
+	s_fan_6 : 5,
+	s_fan_9 : 5,
+	s_fly_a : 5,
+	s_tot 	: 20,
+	bc_i	: 5000,
+	bc_o	: 5000,
+	weight_kg			: 100,
+	weight_kg_corrected	: 100,
+	t_i		: 37,
+	t_i_1	: 50,
+	t_i_2	: 50,
+	t_i_3	: 50,
+	t_i_4	: 50,
+	t_i_5   : 50,
+	rssi	: -70,
+	snr 	: 7, 
 	lat 	: 180, 
 	lon 	: 180, 
 };
@@ -204,6 +234,11 @@ var SENSOR_UNITS =
 	weight_kg			: 'kg',
 	weight_kg_corrected	: 'kg',
 	t_i		: '°C',
+	t_i_1	: '°C',
+	t_i_2	: '°C',
+	t_i_3	: '°C',
+	t_i_4	: '°C',
+	t_i_5	: '°C',
 	rssi	: 'dBm',
 	snr 	: 'dB',
 	lat 	: '°', 
