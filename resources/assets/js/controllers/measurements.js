@@ -110,8 +110,7 @@ app.controller('MeasurementsCtrl', function($scope, $rootScope, $timeout, $inter
         };
 
     $scope.chart.optionsSensors = 
-    {
-        legend: angular.copy($scope.chartLegend),
+    {   legend: angular.copy($scope.chartLegend),
         scales: angular.copy($scope.chartScales),
         elements:
         {
@@ -151,7 +150,7 @@ app.controller('MeasurementsCtrl', function($scope, $rootScope, $timeout, $inter
                 
                 //console.log(this.data.datasets);
                 this.data.datasets.forEach(function (dataset)
-                {
+                {   
                     for (var i = 0; i < dataset.data.length; i++) 
                     {
                         var point = dataset.data[i];

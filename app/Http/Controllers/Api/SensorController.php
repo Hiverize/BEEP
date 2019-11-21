@@ -28,6 +28,7 @@ class SensorController extends Controller
     public function __construct()
     {
         $this->valid_sensors  = Measurement::all()->pluck('pq', 'abbreviation')->toArray();
+        unset($this->valid_sensors['p']);
         $this->output_sensors = Measurement::where('show_in_charts', '=', 1)->pluck('abbreviation')->toArray();
         //die(print_r($this->valid_sensors));
     }
@@ -915,7 +916,7 @@ class SensorController extends Controller
                     $result  = $client::query($query, $options);
                     $sensors = $result->getPoints();
                     if (count($sensors) > 0 && $sensors[0]['count'] > 0)
-                        $queryList[] = 'MEAN("'.$name.'") AS "'.$name.'"';
+                        $queryList[] = 'MEDIAN("'.$name.'") AS "'.$name.'"';
                 }
             }
             $groupBySelect = implode(', ', $queryList);
@@ -944,7 +945,7 @@ class SensorController extends Controller
                     $name = $names[$i];
                     if (in_array($name, $this->output_sensors))
                     {
-                        $sensor_vals = $client::query('SELECT MEAN("value") AS "'.$name.'" FROM "sensors" WHERE "name" = \''.$name.'\' AND "key" = \''.$sensor->key.'\' AND time >= \''.$staTimestampString.'\' AND time <= \''.$endTimestampString.'\' '.$groupByResolution.' '.$limit)->getPoints();
+                        $sensor_vals = $client::query('SELECT MEDIAN("value") AS "'.$name.'" FROM "sensors" WHERE "name" = \''.$name.'\' AND "key" = \''.$sensor->key.'\' AND time >= \''.$staTimestampString.'\' AND time <= \''.$endTimestampString.'\' '.$groupByResolution.' '.$limit)->getPoints();
                         if (count($sensor_vals) > 0)
                         {
                             if (count($sensors_out) == 0)
