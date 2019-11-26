@@ -29,7 +29,9 @@ class SensorController extends Controller
     {
         $this->valid_sensors  = Measurement::all()->pluck('pq', 'abbreviation')->toArray();
         unset($this->valid_sensors['p']);
+        array_push($this->valid_sensors,'t_o');
         $this->output_sensors = Measurement::where('show_in_charts', '=', 1)->pluck('abbreviation')->toArray();
+        array_push($this->output_sensors,'t_o');
         //die(print_r($this->valid_sensors));
     }
    

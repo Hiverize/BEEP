@@ -26,7 +26,7 @@ var COLORS =
 	darkergrey:{r:50,  g:50,  b:50},
 }
 
-var SENSORS = ['t','h','p','l','bc_i','bc_o','weight_kg_corrected','weight_kg','t_i', 't_i_1', 't_i_2', 't_i_3', 't_i_4', 't_i_5']; // not actuators
+var SENSORS = ['t','h','p','l','bc_i','bc_o','weight_kg_corrected','weight_kg','t_i', 't_i_1', 't_i_2', 't_i_3', 't_i_4', 't_i_5', 't_o']; // not actuators
 var SOUND   = ['s_fan_4','s_fan_6','s_fan_9','s_fly_a','s_tot','s_bin098_146Hz','s_bin146_195Hz','s_bin195_244Hz','s_bin244_293Hz','s_bin293_342Hz','s_bin342_391Hz','s_bin391_439Hz','s_bin439_488Hz','s_bin488_537Hz','s_bin537_586Hz']; // all sound releated sensors
 var DEBUG   = ['bv','rssi','snr']; // all debugging info sensors
 
@@ -51,6 +51,7 @@ var SENSOR_COLOR = {
 	t_i_3	:COLORS.lightgreen,
 	t_i_4	:COLORS.lightgreen,
 	t_i_5   :COLORS.lightgreen,
+	t_o   :COLORS.lightgreen,
 	rssi 	:COLORS.lightgrey,
 	snr 	:COLORS.lightgrey1,
 	lat 	:COLORS.lightgrey2, 
@@ -89,6 +90,7 @@ var SENSOR_NAMES =
 	t_i_3	: 't_i_3',
 	t_i_4	: 't_i_4',
 	t_i_5   : 't_i_5',
+	t_o   : 't_o',
 	rssi	: 'rssi',
 	snr 	: 'snr', 
 	lat 	: 'lat', 
@@ -122,11 +124,12 @@ var SENSOR_MIN =
 	weight_kg			: 1,
 	weight_kg_corrected	: 1,
 	t_i		: 34,
-	t_i_1	: -10,
-	t_i_2	: -10,
-	t_i_3	: -10,
-	t_i_4	: -10,
-	t_i_5   : -10,
+	t_i_1	: -100,
+	t_i_2	: -100,
+	t_i_3	: -100,
+	t_i_4	: -100,
+	t_i_5   : -100,
+	t_o   : -100,
 	rssi	: -90,
 	snr 	: 0, 
 	lat 	: 0, 
@@ -155,6 +158,7 @@ var SENSOR_LOW =
 	t_i_3	: -10,
 	t_i_4	: -10,
 	t_i_5   : -10,
+	t_o   : -10,
 	rssi	: -90,
 	snr 	: 0, 
 	lat 	: 0, 
@@ -183,6 +187,7 @@ var SENSOR_HIGH =
 	t_i_3	: 50,
 	t_i_4	: 50,
 	t_i_5   : 50,
+	t_o   : 50,
 	rssi	: -70,
 	snr 	: 7, 
 	lat 	: 180, 
@@ -211,6 +216,7 @@ var SENSOR_MAX =
 	t_i_3	: 50,
 	t_i_4	: 50,
 	t_i_5   : 50,
+	t_o   : 50,
 	rssi	: -70,
 	snr 	: 7, 
 	lat 	: 180, 
@@ -239,6 +245,7 @@ var SENSOR_UNITS =
 	t_i_3	: '°C',
 	t_i_4	: '°C',
 	t_i_5	: '°C',
+	t_o	: '°C',
 	rssi	: 'dBm',
 	snr 	: 'dB',
 	lat 	: '°', 
