@@ -15,6 +15,10 @@ public/webapp/vendor/*
 public/webapp/js/constants.js
 public/.htaccess
 
+public/app/js/constants.js
+resources/assets/js/constants.js
+
+
 storage/app/*
 storage/framework/cache/*
 storage/framework/sessions/*

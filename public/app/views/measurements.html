@@ -103,6 +103,23 @@
 
 							</div>
 
+							<div class="measurement-info-wrapper">
+
+					    		<div ng-if="showChart">
+									<div class="chart-holder">
+										<canvas id="line1" class="chart chart-line" chart-data="measurementData.sensors.data" chart-dataset-override="measurementData.sensors.datasets" chart-series="measurementData.sensors.series" chart-colors="measurementData.sensors.colors" chart-options="chart.optionsSensors" ></canvas> 
+									</div>
+
+									
+									<!-- <div class="chart-holder actuators" ng-if="showChart && showActuators">
+										<canvas id="line2" class="chart chart-line" chart-data="measurementData.actuators.data" chart-dataset-override="measurementData.actuators.datasets" chart-labels="measurementData.actuators.labels" chart-series="measurementData.actuators.series" chart-colors="measurementData.actuators.colors" chart-options="chart.optionsActuators" ></canvas> 
+									</div> -->
+								</div>
+
+								<div ng-if="!showChart">{{lang.no_chart_data}}</div>
+
+							</div>
+
 
 					    	<div class="measurement-info-wrapper">
 
